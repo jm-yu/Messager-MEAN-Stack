@@ -12,6 +12,8 @@ import {MessageListComponent} from "./messages/message-list.component";
 import {MessagesComponent} from "./messages/messages.component";
 import {MessageInputComponent} from "./messages/message-input.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {routing} from "./app.routing";
+import {HeaderComponenet} from "./shared/header.componenet";
 
 
 @NgModule({
@@ -26,9 +28,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MessageListComponent,
     MessagesComponent,
     MessageInputComponent,
+    HeaderComponenet
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule
+    BrowserModule, FormsModule, ReactiveFormsModule, routing
   ],
   providers: [],
   bootstrap: [AppComponent]
