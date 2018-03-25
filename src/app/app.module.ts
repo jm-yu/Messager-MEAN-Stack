@@ -3,14 +3,32 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
+import {SigninComponent} from "./auth/signin.component";
+import {LogoutComponent} from "./auth/logout.component";
+import {SignupComponent} from "./auth/signup.component";
+import {MessageComponent} from "./messages/message.component";
+import {MessageListComponent} from "./messages/message-list.component";
+import {MessagesComponent} from "./messages/messages.component";
+import {MessageInputComponent} from "./messages/message-input.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthComponent,
+    SigninComponent,
+    LogoutComponent,
+    AuthComponent,
+    SignupComponent,
+    MessageComponent,
+    MessageListComponent,
+    MessagesComponent,
+    MessageInputComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule, FormsModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
