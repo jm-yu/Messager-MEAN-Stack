@@ -4,10 +4,12 @@ import {Component} from "@angular/core";
   selector: 'app-logout',
   template: `
     <div calss="col-md-8 col-md-offset-2">
-      <button class="btn btn-danger">Logout</button>
+      <button class="btn btn-danger" (click)="onLogout()">Logout</button>
     </div>
   `
 })
-export class LogoutComponent{
+export class LogoutComponent {
 
+  onLogout() {
+  }
 }
