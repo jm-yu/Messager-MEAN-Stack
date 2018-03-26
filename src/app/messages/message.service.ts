@@ -1,4 +1,4 @@
-import { Message } from "./message.model";
+import { Message } from './message.model';
 
 export class MessageService {
     private messages: Message[] = [];
