@@ -14,6 +14,7 @@ import {MessageInputComponent} from './messages/message-input.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routing} from './app.routing';
 import {HeaderComponent} from './shared/header.componenet';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import {HeaderComponent} from './shared/header.componenet';
     HeaderComponent
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule, routing
+    BrowserModule, FormsModule, ReactiveFormsModule, routing, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

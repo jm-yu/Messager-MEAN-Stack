@@ -1,2 +1,6 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>A NodeJS View</h1>
+{{ showmessage }}
+<form action="/message" method="post">
+  <input type="text" name="content">
+  <button type="submit">Submit</button>
+</form>
