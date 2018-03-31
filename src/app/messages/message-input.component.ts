@@ -12,7 +12,7 @@ export class MessageInputComponent {
     constructor(private messageService: MessageService) {}
 
     onSubmit(form: NgForm) {
-        const message = new Message(form.value.content, 'Max');
+      const message = new Message(form.value.content, 'Max');
       this.messageService.addMessage(message)
         .subscribe(
           data => console.log(data),
@@ -20,4 +20,5 @@ export class MessageInputComponent {
         );
         form.resetForm();
     }
+
 }

@@ -14,20 +14,26 @@ export class MessageService {
 
   private messages: Message[] = [];
 
-    addMessage(message: Message) {
-        this.messages.push(message);
-        const body = JSON.stringify(message);
-        const headers = new HttpHeaders({'Content-Type': 'application/json'});
-        return this.http.post('http://localhost:3000/message', body, {headers: headers})
-          .map((response: Response) => response.json())
-          .catch((error: Response) => Observable.throw(error));
-    }
+  addMessage(message: Message) {
+      this.messages.push(message);
+      const body = JSON.stringify(message);
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.post('http://localhost:3000/message', body, {headers: headers})
+        .map((response: Response) => response)
+        .catch((error: Response) => Observable.throw(error));
+  }
 
-    getMessages() {
-        return this.messages;
-    }
+  getMessages() {
+      return this.http.get('http://localhost:3000/message')
+        .map((response: Response) => {
+          const receivedMessages: Message[] = response['obj'];
+          this.messages = receivedMessages
+          return receivedMessages;
+        })
+        .catch((error: Response) => Observable.throw(error));
+  }
 
-    deleteMessage(message: Message) {
-        this.messages.splice(this.messages.indexOf(message), 1);
-    }
+  deleteMessage(message: Message) {
+      this.messages.splice(this.messages.indexOf(message), 1);
+  }
 }
