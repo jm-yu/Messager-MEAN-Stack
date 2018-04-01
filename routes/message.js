@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.patch('/', function (req, res, next) {
+router.patch('/:id', function (req, res, next) {
   Message.findById(req.params.id, function (err, message) {
     if (err) {
       return res.status(500).json({
@@ -67,7 +67,7 @@ router.patch('/', function (req, res, next) {
   })
 });
 
-router.patch('/', function (req, res, next) {
+router.delete('/:id', function (req, res, next) {
   Message.findById(req.params.id, function (err, message) {
     if (err) {
       return res.status(500).json({
@@ -93,7 +93,7 @@ router.patch('/', function (req, res, next) {
         obj: result
       });
     });
-  })
+  });
 });
 
 

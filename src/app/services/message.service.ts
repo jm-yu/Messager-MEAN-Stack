@@ -20,7 +20,7 @@ export class MessageService {
     return this.http.post('http://localhost:3000/message', body, {headers: headers})
       .map((response: Response) => {
         const msg = response['obj'];
-        this.messages.push(msg);
+        this.messages.push(new Message(msg.content, 'Dummy', message['id'], null));
         console.log(msg._id);
         return msg;
       })
@@ -30,10 +30,13 @@ export class MessageService {
   getMessages() {
     return this.http.get('http://localhost:3000/message')
       .map((response: Response) => {
-        const receivedMessages: Message[] = response['obj'];
-        console.log(receivedMessages);
-        this.messages = receivedMessages;
-        return receivedMessages;
+        const transformedMessages: Message[] = [];
+        const messages = response['obj'];
+        for (const message of messages) {
+            transformedMessages.push(new Message(message.content, 'Dummy', message._id, null));
+        }
+        this.messages = transformedMessages;
+        return transformedMessages;
       })
       .catch((error: Response) => Observable.throw(error));
   }
@@ -45,14 +48,14 @@ export class MessageService {
   updateMessage(message: Message) {
     const body = JSON.stringify(message);
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.patch('http://localhost:3000/message' + message.messageId, body, {headers: headers})
+    return this.http.patch('http://localhost:3000/message/' + message.messageId, body, {headers: headers})
       .map((response: Response) => response)
       .catch((error: Response) => Observable.throw(error));
   }
 
   deleteMessage(message: Message) {
       this.messages.splice(this.messages.indexOf(message), 1);
-      return this.http.delete('http://localhost:3000/message' + message.messageId)
+      return this.http.delete('http://localhost:3000/message/' + message.messageId)
         .map((response: Response) => response)
         .catch((error: Response) => Observable.throw(error));
   }
