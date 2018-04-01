@@ -1,12 +1,12 @@
-import {Component} from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html'
 })
 
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   myForm: FormGroup;
 
   onSubmit() {
@@ -20,7 +20,7 @@ export class SignupComponent {
       lastName: new FormControl(null, Validators.required),
       email: new FormControl(null, [
         Validators.required,
-        Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+        Validators.pattern('[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?')
       ]),
       password: new FormControl(null, Validators.required)
     });

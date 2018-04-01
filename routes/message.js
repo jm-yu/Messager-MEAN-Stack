@@ -21,21 +21,80 @@ router.post('/', function(req, res, next){
   });
 });
 
-// router.get('/', function(req, res, next) {
-//   Message.find()
-//     .exec(function (err, messages) {
-//       if (err) {
-//         return res.status(500).json({
-//           title: 'An error occurred',
-//           error: err
-//         });
-//       }
-//       res.status(200).json({
-//         message: 'Success',
-//         obj: messages
-//       });
-//     });
-// });
+router.get('/', function(req, res, next) {
+  Message.find()
+    .exec(function (err, messages) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: messages
+      });
+    });
+});
+
+router.patch('/', function (req, res, next) {
+  Message.findById(req.params.id, function (err, message) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      });
+    }
+    if (!message) {
+      return res.status(500).json({
+        title: 'No Message Found!',
+        error: {message: 'Message Not Found'}
+      });
+    }
+    message.content = req.body.content;
+    message.save(function (req, result) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'Updated Message',
+        obj: result
+      })
+    });
+  })
+});
+
+router.patch('/', function (req, res, next) {
+  Message.findById(req.params.id, function (err, message) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      });
+    }
+    if (!message) {
+      return res.status(500).json({
+        title: 'No Message Found!',
+        error: {message: 'Message Not Found'}
+      });
+    }
+    message.remove(function (req, result) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'Deleted Message',
+        obj: result
+      });
+    });
+  })
+});
 
 
 module.exports = router;
