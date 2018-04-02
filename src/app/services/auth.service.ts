@@ -18,4 +18,12 @@ export class AuthService {
       .map(response => response)
       .catch((error: Response) => Observable.throw(error));
   }
+
+  signin(user: User) {
+    const body = JSON.stringify(user);
+    const headers = new HttpHeaders({'Content-type':'Application/json'});
+    return this.http.post('http://localhost:3000/user/signin', body, {headers: headers})
+      .map(response => response)
+      .catch((error: Response) => Observable.throw(error));
+  }
 }
