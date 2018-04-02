@@ -20,8 +20,7 @@ export class MessageService {
     return this.http.post('http://localhost:3000/message', body, {headers: headers})
       .map((response: Response) => {
         const msg = response['obj'];
-        this.messages.push(new Message(msg.content, 'Dummy', message['id'], null));
-        console.log(msg._id);
+        this.messages.push(new Message(msg.content, 'Dummy', msg._id, null));
         return msg;
       })
       .catch((error: Response) => Observable.throw(error));

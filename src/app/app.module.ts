@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routing} from './app.routing';
 import {HeaderComponent} from './shared/header.componenet';
 import {HttpClientModule} from '@angular/common/http';
+import {AuthService} from './services/auth.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule, routing, HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
