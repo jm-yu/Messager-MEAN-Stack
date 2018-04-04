@@ -24,10 +24,11 @@ router.get('/', function(req, res, next) {
 router.use('/', function (req, res, next) {
   jwt.verify(req.query.token, 'secret', function (err, decoded){
     if (err) {
-      return res.status(401).json({
-        title: 'Not Authenticated',
-        error: err
-      });
+      //console.log(err.name);
+      //console.log(err);
+      res.status(500).json(JSON.stringify(err));
+      console.log(res);
+      return res;
     }
     next();
   });

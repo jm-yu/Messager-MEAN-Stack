@@ -16,6 +16,8 @@ import {routing} from './app.routing';
 import {HeaderComponent} from './shared/header.componenet';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './services/auth.service';
+import { ErrorComponent } from './error/error.component';
+import {ErrorService} from './services/error.service';
 
 
 @NgModule({
@@ -30,12 +32,13 @@ import {AuthService} from './services/auth.service';
     MessageListComponent,
     MessagesComponent,
     MessageInputComponent,
-    HeaderComponent
+    HeaderComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule, routing, HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

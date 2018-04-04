@@ -1,16 +1,17 @@
 import { Message } from '../models/message.model';
 import {EventEmitter, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import {ErrorService} from './error.service';
 
 
 @Injectable()
 export class MessageService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorService: ErrorService) {}
   messageIsEdit = new EventEmitter<Message>();
   private messages: Message[] = [];
 
@@ -22,6 +23,8 @@ export class MessageService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post('http://localhost:3000/message' + token, body, {headers: headers})
       .map((response: Response) => {
+        console.log(response);
+
         const msg = response['obj'];
         this.messages.push(new Message(
           msg.content,
@@ -31,7 +34,11 @@ export class MessageService {
         );
         return msg;
       })
-      .catch((error: Response) => Observable.throw(error));
+      .catch((errResponse) => {
+        console.log(errResponse.toString());
+        //this.errorService.handleError(error);
+        return Observable.throw('Server error')
+      });
   }
 
   getMessages() {
@@ -39,7 +46,8 @@ export class MessageService {
       .map((response: Response) => {
         const transformedMessages: Message[] = [];
         const messages = response['obj'];
-        console.log(messages);
+
+        console.log(response);
         for (const message of messages) {
             transformedMessages.push(new Message(
                 message.content,
