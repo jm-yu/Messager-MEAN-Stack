@@ -28,6 +28,10 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+  if ('OPTIONS' === req.method) {
+    //respond with 200
+    res.send.status(200);
+  }
   next();
 });
 
@@ -37,7 +41,7 @@ app.use('/', appRouter);
 
 
 // error handler
-app.use(function (req, res, next) {
+app.use(function (err, req, res, next) {
   return res.render('index');
 });
 

@@ -34,8 +34,8 @@ export class MessageService {
         );
         return msg;
       })
-      .catch((errResponse) => {
-        console.log(errResponse.toString());
+      .catch((errResponse: HttpErrorResponse) => {
+        console.log(errResponse);
         //this.errorService.handleError(error);
         return Observable.throw('Server error')
       });
