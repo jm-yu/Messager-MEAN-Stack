@@ -26,7 +26,7 @@ router.use('/', function (req, res, next) {
     if (err) {
       return res.status(401).json({
         title: 'Not Authenticated',
-        error: err
+        error: { message: 'No user logged in'}
       });
     }
     next();

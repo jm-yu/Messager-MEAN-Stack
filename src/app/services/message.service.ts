@@ -55,7 +55,10 @@ export class MessageService {
         this.messages = transformedMessages;
         return transformedMessages;
       })
-      .catch((error: Response) => Observable.throw(error));
+      .catch((err: HttpErrorResponse) => {
+        this.errorService.handleError(err.error);
+        return Observable.throw(err.error);
+      });
   }
 
   editMessage(message: Message) {
@@ -69,7 +72,10 @@ export class MessageService {
       : '';
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/message/' + message.messageId + token, body, {headers: headers})
-      .catch((error: Response) => Observable.throw(error));
+      .catch((err: HttpErrorResponse) => {
+        this.errorService.handleError(err.error);
+        return Observable.throw(err.error);
+      });
   }
 
   deleteMessage(message: Message) {
@@ -78,6 +84,9 @@ export class MessageService {
       : '';
     this.messages.splice(this.messages.indexOf(message), 1);
     return this.http.delete('http://localhost:3000/message/' + message.messageId + token)
-      .catch((error: Response) => Observable.throw(error));
+      .catch((err: HttpErrorResponse) => {
+        this.errorService.handleError(err.error);
+        return Observable.throw(err.error);
+      });
   }
 }
