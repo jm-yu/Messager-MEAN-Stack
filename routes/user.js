@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
   var user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    password: bcrypt.hashSync(req.body.password),
+    password: bcrypt.hashSync(req.body.password, 10),
     email: req.body.email
   })
   user.save(function (err, result) {
@@ -40,6 +40,9 @@ router.post('/signin', function (req, res, next) {
         error: {message: 'Invalid login credentials'}
       });
     }
+    console.log(user.password);
+    console.log(req.body.password);
+    console.log(bcrypt.compare(req.body.password, user.password));
     if (!bcrypt.compare(req.body.password, user.password)){
       return res.status(401).json({
         title: 'Login failed',

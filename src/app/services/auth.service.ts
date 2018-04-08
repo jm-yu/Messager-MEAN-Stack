@@ -15,7 +15,6 @@ export class AuthService {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({'Content-type':'Application/json'});
     return this.http.post('http://localhost:3000/user', body, {headers: headers})
-      .map(response => response)
       .catch((error: Response) => Observable.throw(error));
   }
 
@@ -23,7 +22,6 @@ export class AuthService {
     const body = JSON.stringify(user);
     const headers = new HttpHeaders({'Content-type':'Application/json'});
     return this.http.post('http://localhost:3000/user/signin', body, {headers: headers})
-      .map(response => response)
       .catch((error: Response) => Observable.throw(error));
   }
 

@@ -23,8 +23,6 @@ export class MessageService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post('http://localhost:3000/message' + token, body, {headers: headers})
       .map((response: Response) => {
-        console.log(response);
-
         const msg = response['obj'];
         this.messages.push(new Message(
           msg.content,
@@ -46,7 +44,6 @@ export class MessageService {
         const transformedMessages: Message[] = [];
         const messages = response['obj'];
 
-        console.log(response);
         for (const message of messages) {
             transformedMessages.push(new Message(
                 message.content,
@@ -72,7 +69,6 @@ export class MessageService {
       : '';
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.patch('http://localhost:3000/message/' + message.messageId + token, body, {headers: headers})
-      .map((response: Response) => response)
       .catch((error: Response) => Observable.throw(error));
   }
 
@@ -82,7 +78,6 @@ export class MessageService {
       : '';
     this.messages.splice(this.messages.indexOf(message), 1);
     return this.http.delete('http://localhost:3000/message/' + message.messageId + token)
-      .map((response: Response) => response)
       .catch((error: Response) => Observable.throw(error));
   }
 }
