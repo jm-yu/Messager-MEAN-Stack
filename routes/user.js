@@ -6,10 +6,11 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 
 router.post('/', function(req, res, next) {
+  var salt = bcrypt.genSaltSync(10);
   var user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    password: bcrypt.hashSync(req.body.password, 10),
+    password: bcrypt.hashSync(req.body.password, salt),
     email: req.body.email
   })
   user.save(function (err, result) {
@@ -37,16 +38,17 @@ router.post('/signin', function (req, res, next) {
     if (!user) {
       return res.status(401).json({
         title: 'Login failed!',
-        error: {message: 'Invalid login credentials'}
+        error: {message: 'No such user exists'}
       });
     }
     console.log(user.password);
     console.log(req.body.password);
-    console.log(bcrypt.compare(req.body.password, user.password));
-    if (!bcrypt.compare(req.body.password, user.password)){
+    console.log(bcrypt.compareSync(req.body.password, user.password));
+    if (!bcrypt.compareSync(req.body.password, user.password)){
+      console.log()
       return res.status(401).json({
         title: 'Login failed',
-        error: {message: 'Invalid login credentials'}
+        error: {message: 'Wrong password'}
       });
     }
 
