@@ -21,7 +21,8 @@ Navigate to `http://localhost:4200/`  and use.
 
 udemy class `https://www.udemy.com/angular-2-and-nodejs-the-practical-guide/learn/v4/overview`
 
-write front end with angular5 instead angular2
-use HttpClient instead Http.
+Write front end with angular5. The class used angular2.
+
+Use HttpClient package instead of Http.
 
 
